@@ -43,10 +43,12 @@ public class ImageClassifier {
   private static final String TAG = "TfLiteCameraDemo";
 
   /** Name of the model file stored in Assets. */
-  private static final String MODEL_PATH = "graph.lite";
+  // private static final String MODEL_PATH = "graph.lite";
+  private static final String MODEL_PATH = "models_edge_ICN3104225805981336193_2019-10-16_16-30-09-529_tflite_model.tflite";
 
   /** Name of the label file stored in Assets. */
-  private static final String LABEL_PATH = "labels.txt";
+  // private static final String LABEL_PATH = "labels.txt";
+  private static final String LABEL_PATH = "models_edge_ICN3104225805981336193_2019-10-16_16-30-09-529_tflite_dict.txt";
 
   /** Number of results to show in the UI. */
   private static final int RESULTS_TO_SHOW = 3;
@@ -76,9 +78,9 @@ public class ImageClassifier {
   private ByteBuffer imgData = null;
 
   /** An array to hold inference results, to be feed into Tensorflow Lite as outputs. */
-  private float[][] labelProbArray = null;
+  private byte[][] labelProbArray = null;
   /** multi-stage low pass filter **/
-  private float[][] filterLabelProbArray = null;
+  private byte[][] filterLabelProbArray = null;
   private static final int FILTER_STAGES = 3;
   private static final float FILTER_FACTOR = 0.4f;
 
@@ -98,10 +100,10 @@ public class ImageClassifier {
     labelList = loadLabelList(activity);
     imgData =
         ByteBuffer.allocateDirect(
-            4 * DIM_BATCH_SIZE * DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y * DIM_PIXEL_SIZE);
+            DIM_BATCH_SIZE * DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y * DIM_PIXEL_SIZE);
     imgData.order(ByteOrder.nativeOrder());
-    labelProbArray = new float[1][labelList.size()];
-    filterLabelProbArray = new float[FILTER_STAGES][labelList.size()];
+    labelProbArray = new byte[1][labelList.size()];
+    filterLabelProbArray = new byte[FILTER_STAGES][labelList.size()];
     Log.d(TAG, "Created a Tensorflow Lite Image Classifier.");
   }
 
@@ -193,9 +195,9 @@ public class ImageClassifier {
     for (int i = 0; i < DIM_IMG_SIZE_X; ++i) {
       for (int j = 0; j < DIM_IMG_SIZE_Y; ++j) {
         final int val = intValues[pixel++];
-        imgData.putFloat((((val >> 16) & 0xFF)-IMAGE_MEAN)/IMAGE_STD);
-        imgData.putFloat((((val >> 8) & 0xFF)-IMAGE_MEAN)/IMAGE_STD);
-        imgData.putFloat((((val) & 0xFF)-IMAGE_MEAN)/IMAGE_STD);
+        imgData.put((byte)((((val >> 16) & 0xFF)-IMAGE_MEAN)/IMAGE_STD));
+        imgData.put((byte)((((val >> 8) & 0xFF)-IMAGE_MEAN)/IMAGE_STD));
+        imgData.put((byte)((((val) & 0xFF)-IMAGE_MEAN)/IMAGE_STD));
       }
     }
     long endTime = SystemClock.uptimeMillis();
@@ -206,7 +208,7 @@ public class ImageClassifier {
   private String printTopKLabels() {
     for (int i = 0; i < labelList.size(); ++i) {
       sortedLabels.add(
-          new AbstractMap.SimpleEntry<>(labelList.get(i), labelProbArray[0][i]));
+          new AbstractMap.SimpleEntry<>(labelList.get(i), (float) labelProbArray[0][i]));
       if (sortedLabels.size() > RESULTS_TO_SHOW) {
         sortedLabels.poll();
       }
