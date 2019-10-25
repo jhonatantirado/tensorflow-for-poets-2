@@ -44,11 +44,13 @@ public class ImageClassifier {
 
   /** Name of the model file stored in Assets. */
   // private static final String MODEL_PATH = "graph.lite";
-  private static final String MODEL_PATH = "models_edge_ICN3104225805981336193_2019-10-16_16-30-09-529_tflite_model.tflite";
+  // private static final String MODEL_PATH = "models_edge_ICN3104225805981336193_2019-10-16_16-30-09-529_tflite_model.tflite";
+  private static final String MODEL_PATH = "models_edge_ICN3104225805981336193_model-export_icn_tflite-equimosisv2_20191025122548-2019-10-25T14_26_01.163Z_model.tflite";
 
   /** Name of the label file stored in Assets. */
   // private static final String LABEL_PATH = "labels.txt";
-  private static final String LABEL_PATH = "models_edge_ICN3104225805981336193_2019-10-16_16-30-09-529_tflite_dict.txt";
+  // private static final String LABEL_PATH = "models_edge_ICN3104225805981336193_2019-10-16_16-30-09-529_tflite_dict.txt";
+  private static final String LABEL_PATH = "models_edge_ICN3104225805981336193_model-export_icn_tflite-equimosisv2_20191025122548-2019-10-25T14_26_01.163Z_dict.txt";
 
   /** Number of results to show in the UI. */
   private static final int RESULTS_TO_SHOW = 3;
