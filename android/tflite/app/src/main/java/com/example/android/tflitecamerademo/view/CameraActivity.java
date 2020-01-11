@@ -13,10 +13,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package com.example.android.tflitecamerademo;
+package com.example.android.tflitecamerademo.view;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.example.android.tflitecamerademo.Camera2BasicFragment;
+import com.example.android.tflitecamerademo.R;
 
 /** Main {@code Activity} class for the Camera app. */
 public class CameraActivity extends Activity {

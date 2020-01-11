@@ -21,4 +21,9 @@
     <string name="toggle_turn_on">NN:On</string>
     <string name="toggle_turn_off">NN:Off</string>
     <string name="toggle">Use NNAPI</string>
+    <string name="txt_camera">Camera</string>
+    <string name="txt_gallery">Gallery</string>
+    <string name="version">Version 1.0</string>
+    <string name="camera_util_select_picture">Select Picture</string>
+    <string name="txt_real_time">Real Time</string>
 </resources>
